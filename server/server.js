@@ -10,19 +10,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/jigglydex', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-// Handle Mongoose connection events
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
-  });
-// Handle Mongoose connection error
-mongoose.connection.on('error', (err) => {
-    console.error('Error connecting to MongoDB:', err.message);
-  });
 
 
 // Accept incoming requests from the front end which is on another server
