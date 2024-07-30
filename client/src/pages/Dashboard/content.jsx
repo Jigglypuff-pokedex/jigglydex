@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box, Grid, Pagination, styled } from '@mui/material';
 import FlipCard from './flipCard';
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 1199, 
+      lg: 1530,
+      xl: 1536, 
+    },
+  },
+});
 
 const ContentBox = styled(Box)(({ theme }) => ({
   overflowY: 'auto',
@@ -33,29 +46,30 @@ const Content = () => {
   }));
 
   const paginatedData = data.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
   return (
-    <ContentBox>
-      <Grid container spacing={2}>
-        {paginatedData.map((pokemon) => (
-          <Grid item xs={12} sm={6} md={6} lg={3} key={pokemon.id}>
-            <FlipCard
-              id={pokemon.id}
-              name={pokemon.name}
-              type={pokemon.type}
-              image={pokemon.image}
-              stats={pokemon.stats}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Pagination
-        count={Math.ceil(data.length / itemsPerPage)}
-        page={page}
-        onChange={handleChange}
-        sx={{ display: 'flex', justifyContent: 'center', my: 2 }}
-      />
-    </ContentBox>
+    <ThemeProvider theme={theme}>
+      <ContentBox>
+        <Grid container spacing={2}>
+          {paginatedData.map((pokemon) => (
+            <Grid item xs={12} sm={6} md={4} lg={4} xl={3} key={pokemon.id}>
+              <FlipCard
+                id={pokemon.id}
+                name={pokemon.name}
+                type={pokemon.type}
+                image={pokemon.image}
+                stats={pokemon.stats}
+              />
+            </Grid>
+          ))}
+        </Grid>
+        <Pagination
+          count={Math.ceil(data.length / itemsPerPage)}
+          page={page}
+          onChange={handleChange}
+          sx={{ display: 'flex', justifyContent: 'center', my: 2 }}
+        />
+      </ContentBox>
+    </ThemeProvider>
   );
 };
 
