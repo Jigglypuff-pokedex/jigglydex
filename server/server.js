@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
+const dashboardRoutes = require('./routes/dashboard.js');
+const favoritesRoutes = require('./routes/favorites.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -26,6 +28,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+app.use('/dashboard', dashboardRoutes);
+
+app.use('/favorites', favoritesRoutes);
 
 // 404 error
 app.all('*', (req, res) => {
