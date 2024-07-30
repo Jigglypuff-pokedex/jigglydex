@@ -8,7 +8,7 @@ router.get('/', favoritesController.getFavorites, (req, res) => {
 });
 
 //request to /favorites?userId=${id}&pokemonId=${pokemonId}, adds a pokemon to user's favorites
-router.post('/', favoritesController.addFavorites, (req, res) => {
+router.post('/', favoritesController.addFavorite, (req, res) => {
     return res.status(200).send(res.locals.favorites);
 });
 

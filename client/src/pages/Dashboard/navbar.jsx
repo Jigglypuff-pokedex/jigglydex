@@ -95,6 +95,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 // Define the Navbar functional component
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate(); // Use useNavigate to handle navigation
 
   // Handle opening the navigation menu
   const handleOpenNavMenu = (event) => {
@@ -104,6 +105,12 @@ function Navbar() {
   // Handle closing the navigation menu
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  // Handle logout logic
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove the token from local storage
+    navigate('/login'); // Redirect to the login page
   };
 
   return (
