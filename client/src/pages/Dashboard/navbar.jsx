@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 
 // Define the pages for the navigation menu
@@ -65,6 +66,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 // Define the Navbar functional component
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate(); // Use useNavigate to handle navigation
 
   // Handle opening the navigation menu
   const handleOpenNavMenu = (event) => {
@@ -76,17 +78,23 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
+  // Handle logout logic
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove the token from local storage
+    navigate('/login'); // Redirect to the login page
+  };
+
   return (
     <AppBar position="static" sx={{ background: 'linear-gradient(to right, #45b3e7, #bd559c)', height: '80px' }}>
-       <Container maxWidth={false} sx={{ pb: 0, mt:1 }}> 
+      <Container maxWidth={false} sx={{ pb: 0, mt: 1 }}>
         <Toolbar disableGutters>
-           {/* Logo display for medium and larger screens */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center'}}>
-          <IconButton sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src={logo} sx={{ width: '150px', height: 'auto', marginLeft: '100px', borderRadius:0}}/>
-          </IconButton>
+          {/* Logo display for medium and larger screens */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+            <IconButton sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src={logo} sx={{ width: '150px', height: 'auto', marginLeft: '100px', borderRadius: 0 }} />
+            </IconButton>
           </Box>
-          
+
           {/* Hamburger menu for small screens */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -125,26 +133,27 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          
-          <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex', my: 0 }, justifyContent: 'center'}}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', my: 0 }, justifyContent: 'center' }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{
                   height: '100%',
-                  mr: 3, 
-                  ml: 3,  
-                  color: 'white', 
+                  mr: 3,
+                  ml: 3,
+                  color: 'white',
                   display: 'block',
-                  border: '1px solid transparent', 
+                  border: '1px solid transparent',
                   '&:hover': {
-                    border: '1px solid rgba(255, 255, 255, 0.5)', 
-                    cursor: 'pointer', 
+                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                    cursor: 'pointer',
                   },
                   '&:active': {
-                    border: '1px solid rgba(255, 255, 255, 0.5)', 
-                  }}}
+                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                  },
+                }}
               >
                 {page}
               </Button>
@@ -152,20 +161,20 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+            </Search>
           </Box>
-          <Button color="inherit">LogOut</Button>
+          <Button color="inherit" onClick={handleLogout}>
+            LogOut
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default Navbar;

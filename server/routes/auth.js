@@ -25,17 +25,17 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// Login Route (Optional: Include if you have a login feature)
+// Login Route
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).json({ email: 'User not found' });
+      return res.status(400).json({ message: 'User not found' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ password: 'Incorrect password' });
+      return res.status(400).json({ message: 'Incorrect password' });
     }
     const payload = { id: user.id, username: user.username };
     const token = jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 });
