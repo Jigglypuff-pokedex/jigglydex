@@ -11,7 +11,6 @@ const Login = () => {
   const [error , setError] = useState(false);
 
   // POST request
-  useEffect(() => {
     const handleLogin = (e) => {
       e.preventDefault;
 
@@ -37,7 +36,6 @@ const Login = () => {
         setError(true);
       })
     }
-  });
 
   return (
     <>
