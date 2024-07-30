@@ -13,11 +13,11 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
-import { useNavigate, Link } from 'react-router-dom'; 
+import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 
 // Define the pages for the navigation menu
-const pages = ['Dashboard'];
+const pages = ['Dashboard', 'Evolutions'];
 
 // Define a styled Search component using Material UI's styling system
 const Search = styled('div')(({ theme }) => ({
