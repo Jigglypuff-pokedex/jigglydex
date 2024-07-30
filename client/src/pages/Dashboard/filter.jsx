@@ -10,12 +10,12 @@ const FilterBox = styled(Paper)(({ theme }) => ({
 
 const types = ['Grass', 'Fire', 'Water', 'Electric', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy'];
 const generations = ['Generation I', 'Generation II', 'Generation III', 'Generation IV', 'Generation V', 'Generation VI', 'Generation VII', 'Generation VIII'];
-const games = ['Red/Blue', 'Yellow', 'Gold/Silver', 'Crystal', 'Ruby/Sapphire', 'Emerald', 'Diamond/Pearl', 'Platinum', 'Black/White', 'Black 2/White 2', 'X/Y', 'Omega Ruby/Alpha Sapphire', 'Sun/Moon', 'Ultra Sun/Ultra Moon', 'Sword/Shield'];
+// const games = ['Red/Blue', 'Yellow', 'Gold/Silver', 'Crystal', 'Ruby/Sapphire', 'Emerald', 'Diamond/Pearl', 'Platinum', 'Black/White', 'Black 2/White 2', 'X/Y', 'Omega Ruby/Alpha Sapphire', 'Sun/Moon', 'Ultra Sun/Ultra Moon', 'Sword/Shield'];
 
 const Filter = () => {
   const [selectedType, setSelectedType] = React.useState('');
   const [selectedGeneration, setSelectedGeneration] = React.useState('');
-  const [selectedGame, setSelectedGame] = React.useState('');
+  // const [selectedGame, setSelectedGame] = React.useState('');
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -25,9 +25,9 @@ const Filter = () => {
     setSelectedGeneration(event.target.value);
   };
 
-  const handleGameChange = (event) => {
-    setSelectedGame(event.target.value);
-  };
+  // const handleGameChange = (event) => {
+  //   setSelectedGame(event.target.value);
+  // };
 
   return (
     <FilterBox>
@@ -63,7 +63,7 @@ const Filter = () => {
         </Select>
       </FormControl>
       
-      <Typography variant="h6">Game</Typography>
+      {/* <Typography variant="h6">Game</Typography>
       <FormControl fullWidth>
         <Select
           labelId="game-select-label"
@@ -75,8 +75,8 @@ const Filter = () => {
               {game}
             </MenuItem>
           ))}
-        </Select>
-      </FormControl> 
+        </Select> */}
+      {/* </FormControl>  */}
     </FilterBox>
   );
 };
