@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './navbar.css';
-import logo from '../../assets/logo2.png'
+import logo from '../../assets/newlogo.png'
 import pokeball from '../../assets/pkball.png';
 
 const Navbar = ({ noBackground,showLogo }) => {
