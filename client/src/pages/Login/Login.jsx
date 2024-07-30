@@ -12,7 +12,7 @@ const Login = () => {
 
   // POST request
     const handleLogin = (e) => {
-      e.preventDefault;
+      e.preventDefault();
 
       const user = { username , password };
 
@@ -63,7 +63,7 @@ const Login = () => {
           {/* login button */}
           <button type="submit">Login</button>
           {success && <p className='success-message'>{success}</p>}
-          {error && <p className='error-message'>{error}</p>}
+          {error && <p className='error-message'>Login failed. Please try again.</p>}
         </form>
       </div>
     </div>
