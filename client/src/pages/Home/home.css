@@ -61,8 +61,8 @@
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: rgb(193, 112, 125);
-    color: white;
+    background: linear-gradient(45deg, #ff6b6b, #ffcc5c, #88d8b0, #6b6bff);
+    color: rgb(156, 75, 89);
     border: none;
     border-radius: 5px;
     cursor: pointer;
