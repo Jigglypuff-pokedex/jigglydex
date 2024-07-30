@@ -29,9 +29,9 @@ const CardFace = styled(Card)(({ theme }) => ({
   width: '100%',
   height: '100%',
   backfaceVisibility: 'hidden',
-  border: '1px solid #ccc',  // 边框颜色
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',  // 阴影效果
-  borderRadius: '10px',  // 圆角
+  border: '1px solid #ccc', 
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', 
+  borderRadius: '10px',  
 }));
 
 const CardBack = styled(CardFace)(({ theme }) => ({
