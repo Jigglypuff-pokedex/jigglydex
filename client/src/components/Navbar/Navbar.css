@@ -12,13 +12,13 @@
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    box-sizing: border-box; 
     font-family: "Josefin Sans", sans-serif;
 }
 
 .navbar.no-background {
-  background: none; /* Remove background for no-background class */
-  animation: none; /* Remove animation for no-background class */
+  background: none; 
+  animation: none; 
 }
 
 .navbar-brand .nav-link {
@@ -41,13 +41,14 @@
 }
   
 .nav-link:hover {
-    color: rgb(33, 167, 197);
+    color: rgb(141, 50, 65);
 }
 
 .pokeball-icon {
-  width: 20px; /* Adjust the size of the Pokéball icon as needed */
-  height: 20px; /* Adjust the size of the Pokéball icon as needed */
-  margin-right: 10px; /* Adjust the space between the icon and the text */
+  width: 20px; 
+  height: 20px;
+  margin-right: 10px; 
+  margin-top: 30px;
 }  
 
 @media (max-width: 768px) {
