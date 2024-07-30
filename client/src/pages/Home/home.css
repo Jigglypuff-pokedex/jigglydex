@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+   
+.home-container {
+    background-image: url('../../assets/bg1.png'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    width: 100%; 
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center; 
+    padding-left: 200px; 
+    min-width: 300px; 
+    margin: 0 auto; 
+}
+
+
+@media (max-width: 480px) {
+    .home-container {
+      min-width: 200px;
+      padding-left: 20px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .home-container {
+      min-width: 250px;
+      padding-left: 50px;
+    }
+}
+  
+@media (min-width: 1000px) {
+    .home-container {
+      max-width: auto; 
+      padding-left: 100px; 
+    }
+}
+
+.intro {
+    font-family: "Josefin Sans", sans-serif;
+    animation: slide-in 1s ease-out;
+    font-size: 50px;
+}
+
+#welcome {
+    color: rgb(156, 75, 89);
+    border-color: black;
+}
+
+#slogan {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.get-started-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgb(193, 112, 125);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.poke-image {
+    width: 200px;
+    height: 60px;
+    vertical-align: middle; 
+    margin-left: 0; 
+}
+
+/* Keyframes for slide-in animation */
+@keyframes slide-in {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}

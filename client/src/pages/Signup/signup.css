@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&display=swap');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.signup {
+    background-image: url('../../assets/j2.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100vh; 
+    width: 100vw; 
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+    font-family: "Manrope", sans-serif;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 200px;
+    width: 450px; 
+    height: auto; 
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ques-signup {
+    text-align: center;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.poke-hi {
+    margin-left: 5px; 
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    
+}
+
+#slide-in-text {
+    display: inline-block;
+    font-size: 2em; 
+    margin-bottom: 20px;
+    position: absolute; 
+    top: 10%; 
+    left: 50%; 
+    bottom: 10%;
+    /* transform: translateX(-50%);  */
+}
+
+/* Slide-in animation from right */
+/* @keyframes slide-in {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+} */
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+form div {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form label {
+    flex: 1;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+form input {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: "Manrope", sans-serif;
+}
+
+form button {
+    padding: 10px;
+    background-color: rgb(165, 98, 109);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+}
+
+form button:hover {
+    background-color: rgb(136, 55, 69);
+    font-size: 18px;
+}
