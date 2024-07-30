@@ -4,11 +4,6 @@ import Home from '../src/pages/Home/Home.jsx';
 import Dashboard from './pages/Dashboard/dashboard.jsx';
 import Signup from '../src/pages/Signup/Signup.jsx';
 import Login from '../src/pages/Login/Login.jsx';
-import PrivateRoute from './components/PrivateRoute';
-import Signup from '../src/pages/Signup/Signup.jsx';
-import Login from '../src/pages/Login/Login.jsx';
-import PokemonGacha from './pages/Pokegacha/pokegacha.jsx';
-
 
 const App = () => {
   return (
@@ -17,15 +12,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/pokemonGacha' element={<PokemonGacha />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
