@@ -1,10 +1,26 @@
+const User = require('../models/User');
+
 const favoritesController = {};
 
 favoritesController.getFavorites = async (req, res, next) => {
     try {
         const { userId } = req.query;
-        //DOES NOT FETCH FROM DB
-        res.locals.favorites = `Temporary favorites: userID=${userId}`;
+        if (!userId) {
+            return next({
+                log: 'favoritesController.getFavorites: ERROR: Missing userId',
+                status: 400,
+                message: { err: 'Missing userId' },
+            });
+        }
+        const user = await User.findById(userId);
+        if (!user) {
+            return next({
+                log: 'favoritesController.getFavorites: ERROR: User not found',
+                status: 404,
+                message: { err: 'User not found' },
+            });
+        }
+        res.locals.favorites = user.favorites;
         return next();
     } catch (err) {
         return next({
@@ -18,8 +34,26 @@ favoritesController.getFavorites = async (req, res, next) => {
 favoritesController.addFavorite = async (req, res, next) => {
     try {
         const { userId, pokemonId } = req.body;
-        //DOES NOT ADD TO DB
-        res.locals.favorites = pokemonId;
+        if (!userId || !pokemonId) {
+            return next({
+                log: 'favoritesController.addFavorite: ERROR: Missing userId or pokemonId',
+                status: 400,
+                message: { err: 'Missing userId or pokemonId' },
+            });
+        }
+        const user = await User.findById(userId);
+        if (!user) {
+            return next({
+                log: 'favoritesController.addFavorite: ERROR: User not found',
+                status: 404,
+                message: { err: 'User not found' },
+            });
+        }
+        if (!user.favorites.includes(pokemonId)) {
+            user.favorites.push(pokemonId);
+            await user.save();
+        }
+        res.locals.favorites = user.favorites;
         return next();
     } catch (err) {
         return next({
@@ -33,8 +67,24 @@ favoritesController.addFavorite = async (req, res, next) => {
 favoritesController.removeFavorite = async (req, res, next) => {
     try {
         const { userId, pokemonId } = req.query;
-        //DOES NOT REMOVE FROM DB
-        res.locals.favorites = `temporary remove message`;
+        if (!userId || !pokemonId) {
+            return next({
+                log: 'favoritesController.removeFavorite: ERROR: Missing userId or pokemonId',
+                status: 400,
+                message: { err: 'Missing userId or pokemonId' },
+            });
+        }
+        const user = await User.findById(userId);
+        if (!user) {
+            return next({
+                log: 'favoritesController.removeFavorite: ERROR: User not found',
+                status: 404,
+                message: { err: 'User not found' },
+            });
+        }
+        user.favorites = user.favorites.filter(id => id !== parseInt(pokemonId));
+        await user.save();
+        res.locals.favorites = user.favorites;
         return next();
     } catch (err) {
         return next({

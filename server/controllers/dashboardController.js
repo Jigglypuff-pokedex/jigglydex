@@ -1,4 +1,4 @@
-const { all } = require("../routes/dashboard");
+const axios = require('axios');
 
 const dashboardController = {};
 
