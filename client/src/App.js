@@ -1,11 +1,15 @@
 import React from 'react';
+import Dashboard from './components/Dashboard/dashboard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
     
   return (
-    <div>
-      <h1>Hello JigglyDex</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 
