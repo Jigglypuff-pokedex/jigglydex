@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './signup.css';
 import hi from '../../assets/hihi.png';
 import logo from '../../assets/logo2.png';
@@ -12,6 +13,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('');
   const [error, setError] = useState(false);
+  const navigate = useNavigate();  // Hook to use navigate
 
   // POST request
   const handleSignup = (e) => {
@@ -19,7 +21,7 @@ const Signup = () => {
 
     const user = { firstName, lastName, email, username, password };
 
-    fetch('http://localhost:3000/signup', {
+    fetch('http://localhost:3000/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,8 +33,8 @@ const Signup = () => {
         console.log('Success -->', data);
         setSuccess('Signup successful!');
         setError(false);
+        navigate('/dashboard');  // Redirect to dashboard on successful signup
       })
-      // catch error
       .catch((error) => {
         console.error('Error', error);
         setSuccess('');
