@@ -80,6 +80,14 @@ dashboardController.getPokemon = async (req, res, next) => {
                     id: data.id,
                     types: data.types.map(type => type.type.name),
                     image: data.sprites.front_default,
+                    stats: {
+                        hp: data.stats[0].base_stat,
+                        attack: data.stats[1].base_stat,
+                        defense: data.stats[2].base_stat,
+                        specialAttack: data.stats[3].base_stat,
+                        specialDefense: data.stats[4].base_stat,
+                        speed: data.stats[5].base_stat,
+                    }
                 };
             });
             const fetchedPokemon = await Promise.all(fetchPromises);
