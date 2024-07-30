@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './signup.css';
 import hi from '../../assets/hihi.png';
-import logo from '../../assets/logo2.png';
+import logo from '../../assets/newlogo.png';
 import Navbar from '../../components/Navbar/Navbar.jsx';
 
 const Signup = () => {
