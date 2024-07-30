@@ -13,11 +13,11 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
-import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo2.png';
+import { useNavigate, Link } from 'react-router-dom';
+import logo from '../../assets/newlogo.png';
 
 // Define the pages for the navigation menu
-const pages = ['Dashboard', 'Collections'];
+const pages = ['Dashboard', 'Evolutions'];
 
 // Define a styled Search component using Material UI's styling system
 const Search = styled('div')(({ theme }) => ({
@@ -84,13 +84,15 @@ function Navbar() {
     navigate('/login'); // Redirect to the login page
   };
 
+  const isLoggedIn = !!localStorage.getItem('token');
+
   return (
     <AppBar position="static" sx={{ background: 'linear-gradient(to right, #45b3e7, #bd559c)', height: '80px' }}>
       <Container maxWidth={false} sx={{ pb: 0, mt: 1 }}>
         <Toolbar disableGutters>
           {/* Logo display for medium and larger screens */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-            <IconButton sx={{ p: 0 }}>
+            <IconButton sx={{ p: 0 }} onClick={() => navigate('/')}>
               <Avatar alt="Remy Sharp" src={logo} sx={{ width: '150px', height: 'auto', marginLeft: '100px', borderRadius: 0 }} />
             </IconButton>
           </Box>
@@ -131,6 +133,22 @@ function Navbar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              {/* check if the user is logged in? */}
+              {/* if not hide collection and logout buttons */}
+              {isLoggedIn ? (
+                <>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">Collections</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem onClick={() => navigate('/login')}>
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
 
@@ -152,25 +170,66 @@ function Navbar() {
                   },
                   '&:active': {
                     border: '1px solid rgba(255, 255, 255, 0.5)',
-                  },
+                  }
                 }}
               >
-                {page}
+                <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>{page}</Link>
               </Button>
             ))}
+            {isLoggedIn && (
+              <>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    height: '100%',
+                    mr: 3,
+                    ml: 3,
+                    color: 'white',
+                    display: 'block',
+                    border: '1px solid transparent',
+                    '&:hover': {
+                      border: '1px solid rgba(255, 255, 255, 0.5)',
+                      cursor: 'pointer',
+                    },
+                    '&:active': {
+                      border: '1px solid rgba(255, 255, 255, 0.5)',
+                    }
+                  }}
+                >
+                  <Link to="/collections" style={{ textDecoration: 'none', color: 'inherit' }}>Collections</Link>
+                </Button>
+              </>
+            )}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </Search>
+            {isLoggedIn ? (
+              <Button
+                color="inherit"
+                onClick={handleLogout}
+                sx={{ ml: 2 }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                onClick={() => navigate('/login')}
+                sx={{ ml: 2 }}
+              >
+                Login
+              </Button>
+            )}
           </Box>
-          <Button color="inherit" onClick={handleLogout}>
-            LogOut
-          </Button>
         </Toolbar>
       </Container>
     </AppBar>
