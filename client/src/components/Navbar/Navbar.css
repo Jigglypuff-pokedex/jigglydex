@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6b6b, #ffcc5c, #88d8b0, #6b6bff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.navbar.no-background {
+  background: none; /* Remove background for no-background class */
+  animation: none; /* Remove animation for no-background class */
+}
+
+.navbar-brand .nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Josefin Sans", sans-serif;
+}
+  
+.navbar-links {
+    display: flex;
+    margin-right: 100px;
+    font-size: 18px;
+}
+  
+.nav-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+  
+.nav-link:hover {
+    color: rgb(33, 167, 197);
+}
+
+.pokeball-icon {
+  width: 20px; /* Adjust the size of the Pokéball icon as needed */
+  height: 20px; /* Adjust the size of the Pokéball icon as needed */
+  margin-right: 10px; /* Adjust the space between the icon and the text */
+}  
+
+@media (max-width: 768px) {
+    .navbar-links {
+      flex-direction: column;
+      display: none;
+    }
+  
+    .navbar-links.active {
+      display: flex;
+    }
+  
+    .navbar {
+      flex-direction: column;
+    }
+}
+  
+@keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+}
+  

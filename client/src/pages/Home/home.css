@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
-   
+
+* {
+  box-sizing: border-box;
+}
+
 .home-container {
     background-image: url('../../assets/bg1.png'); 
     background-size: cover;
@@ -9,7 +13,7 @@
     display: flex;
     justify-content: flex-start; 
     align-items: center; 
-    padding-left: 200px; 
+    margin-left: 250px; 
     min-width: 300px; 
     margin: 0 auto; 
 }
