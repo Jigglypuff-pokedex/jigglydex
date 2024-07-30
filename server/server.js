@@ -5,6 +5,7 @@ const cors = require('cors');
 const connectDB = require('./db'); 
 const dashboardRoutes = require('./routes/dashboard.js');
 const favoritesRoutes = require('./routes/favorites.js');
+const authRoutes = require('./routes/auth.js'); // Import the auth routes
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.use('/dashboard', dashboardRoutes);
 app.use('/favorites', favoritesRoutes);
+app.use('/signup', authRoutes); // Include the signup route
 
 // 404 error
 app.all('*', (req, res) => {
