@@ -9,7 +9,7 @@ const favoritesRoutes = require('./routes/favorites.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
@@ -30,7 +30,7 @@ mongoose.connection.on('error', (err) => {
 // Accept incoming requests from the front end which is on another server
 app.use(
     cors({
-        origin: 'http://localhost:8080',
+        origin: 'http://localhost:8000',
     })
 );
 
