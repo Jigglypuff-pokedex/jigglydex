@@ -7,7 +7,7 @@
 }
 
 .select-heading {
-    color: white;
+    color: rgb(255, 255, 255);
     font-weight: normal;
 }
 .pokemon-selector {
@@ -15,12 +15,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(70, 32, 165);
     padding: 50px;
     padding-bottom: 60px;
     margin: 50px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: rgb(92, 64, 165);
 }
 
 .pokemon-select-box {
@@ -58,6 +58,11 @@
 
 .arena {
     display: flex;
+    flex-direction: column;
+}
+
+.opponents {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -65,6 +70,135 @@
 
 .pokemon-card {
     display: flex;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.name-image {
+    display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.battle-stats {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 5px;
+    width: 400px;
+}
+
+/* .stat-name {
+    width: 300px;
+} */
+
+.battle-image {
+    width: 150px;
+    height: 150px;
+}
+
+.stat-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.stat-bar-fill {
+    height: 10px;
+    border-radius: 10px;
+}
+
+.hp-bar-fill {
+    background-color: #db4444;
+}
+
+.attack-bar-fill {
+    background-color: #e08c38;
+}
+
+.defense-bar-fill {
+    background-color: #3e89d4;
+}
+
+.special-attack-bar-fill {
+    background-color: #8136cc;
+}
+
+.special-defense-bar-fill {
+    background-color: #43a243;
+}
+
+.speed-bar-fill {
+    background-color: #eaed40;
+}
+
+.battle-arena {
+    text-align: center;
+}
+
+.arena-heading {
+    font-size: 24px;
+}
+
+.battle-actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-actions {
+    display: flex;
+    flex: wrap;
+    flex-direction: row;
+    width: 20%;
+}
+
+.action-button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.battle-log {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 10px;
+    padding: 0 40px 10px 10px;
+    width: 80%;
+    background-color: rgb(217, 217, 217);
+    border-radius: 5px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.battle-log-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-battle {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 40px;
 }

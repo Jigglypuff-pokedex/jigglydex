@@ -4,7 +4,7 @@ import Home from '../src/pages/Home/Home.jsx';
 import Dashboard from './pages/Dashboard/dashboard.jsx';
 import Signup from '../src/pages/Signup/Signup.jsx';
 import Login from '../src/pages/Login/Login.jsx';
-import Battle from '../src/pages/Battle/Battle.jsx';
+import Battle from '../src/pages/Battle/battle.jsx';
 
 const App = () => {
   return (

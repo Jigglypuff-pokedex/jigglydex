@@ -40,17 +40,20 @@ dashboardController.getPokemon = async (req, res, next) => {
                         generationUrls.push(variety.pokemon.url);
                     });
                 });
-            
+                
                 await Promise.all(generationPromises);
             }
 
             //get intersection of fetchedUrls
-            if(typeUrls) {
+            if(typeUrls.length !== 0 && generationUrls.length !== 0) {
+                let typeUrlsSet = new Set(typeUrls);
+                fetchedUrls = generationUrls.filter(url => typeUrlsSet.has(url));
+            } else if (typeUrls.length !== 0 ) {
                 fetchedUrls = typeUrls;
+            } else {
+                fetchedUrls = generationUrls;
             }
-            if(generationUrls) {
-                fetchedUrls = fetchedUrls.size ? [...fetchedUrls].filter(url => generationUrls.has(url)) : generationUrls;
-            }
+            
         }
         res.locals.pokemon = fetchedUrls;
         //fetchedUrls has all pokemon urls

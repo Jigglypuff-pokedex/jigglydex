@@ -131,6 +131,21 @@ const Battle = () => {
         }
     };
 
+    const renderStatBar = (label, value, className) => (
+        <div className="stat-bar">
+            <div className={`stat-bar-fill ${className}`} style={{ width: `${value}%` }}></div>
+        </div>
+    );
+
+    const startBattle = () => {
+        setSelectedPokemon(null);
+        setUserPokemon(null);
+        setComputerPokemon(null);
+        setBattleLog([]);
+        setIsBattleOver(false);
+        setUserTurn(true);
+    };
+
     return (
         <>
             <Navbar />
@@ -138,49 +153,102 @@ const Battle = () => {
                 <h1 className="arena-heading">Battle Arena</h1>
                 {selectedPokemon ? (
                     <div className="arena">
-                        {userPokemon && (
-                            <div className="pokemon-card">
-                                <h2>User's Pokémon</h2>
-                                <p>Name: {userPokemon.name}</p>
-                                <img src={userPokemon.image} alt={userPokemon.name} />
-                                <p>HP: {userPokemon.stats.hp}</p>
-                                <p>Attack: {userPokemon.stats.attack}</p>
-                                <p>Defense: {userPokemon.stats.defense}</p>
-                                <p>Special Attack: {userPokemon.stats.specialAttack}</p>
-                                <p>Special Defense: {userPokemon.stats.specialDefense}</p>
-                                <p>Speed: {userPokemon.stats.speed}</p>
-                            </div>
-                        )}
-                        {computerPokemon && (
-                            <div className="pokemon-card">
-                                <h2>Computer's Pokémon</h2>
-                                <p>Name: {computerPokemon.name}</p>
-                                <img src={computerPokemon.image} alt={computerPokemon.name} />
-                                <p>HP: {computerPokemon.stats.hp}</p>
-                                <p>Attack: {computerPokemon.stats.attack}</p>
-                                <p>Defense: {computerPokemon.stats.defense}</p>
-                                <p>Special Attack: {computerPokemon.stats.specialAttack}</p>
-                                <p>Special Defense: {computerPokemon.stats.specialDefense}</p>
-                                <p>Speed: {computerPokemon.stats.speed}</p>
-                            </div>
-                        )}
-                        <div>
-                            <h3>Battle Log</h3>
-                            <ul>
-                                {battleLog.map((log, index) => (
-                                    <li key={index}>{log}</li>
-                                ))}
-                            </ul>
+                        <div className="opponents">
+                            {userPokemon && (
+                                <div className="pokemon-card">
+                                    <div className="name-image">
+                                        <h2>Your Pokémon</h2>
+                                        <h3>{userPokemon.name}</h3>
+                                        <img className="battle-image" src={userPokemon.image} alt={userPokemon.name} />
+                                    </div>
+                                    <div className="battle-stats">
+                                        <div className="stat-row">
+                                            <span className="stat-name">HP:</span>
+                                            {renderStatBar('HP', userPokemon.stats.hp, 'hp-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Attack:</span>
+                                            {renderStatBar('Attack', userPokemon.stats.attack, 'attack-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Defense:</span>
+                                            {renderStatBar('Defense', userPokemon.stats.defense, 'defense-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Special Attack:</span>
+                                            {renderStatBar('Special Attack', userPokemon.stats.specialAttack, 'special-attack-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Special Defense:</span>
+                                            {renderStatBar('Special Defense', userPokemon.stats.specialDefense, 'special-defense-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Speed:</span>
+                                            {renderStatBar('Speed', userPokemon.stats.speed, 'speed-bar-fill')}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {computerPokemon && (
+                                <div className="pokemon-card">
+                                    <div className="name-image">
+                                        <h2>Computer's Pokémon</h2>
+                                        <h3>{computerPokemon.name}</h3>
+                                        <img className="battle-image" src={computerPokemon.image} alt={computerPokemon.name} />
+                                    </div>
+                                    <div className="battle-stats">
+                                        <div className="stat-row">
+                                            <span className="stat-name">HP:</span>
+                                            {renderStatBar('HP', computerPokemon.stats.hp, 'hp-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Attack:</span>
+                                            {renderStatBar('Attack', computerPokemon.stats.attack, 'attack-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Defense:</span>
+                                            {renderStatBar('Defense', computerPokemon.stats.defense, 'defense-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Special Attack:</span>
+                                            {renderStatBar('Special Attack', computerPokemon.stats.specialAttack, 'special-attack-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Special Defense:</span>
+                                            {renderStatBar('Special Defense', computerPokemon.stats.specialDefense, 'special-defense-bar-fill')}
+                                        </div>
+                                        <div className="stat-row">
+                                            <span className="stat-name">Speed:</span>
+                                            {renderStatBar('Speed', computerPokemon.stats.speed, 'speed-bar-fill')}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
-                        {!isBattleOver && userTurn && (
-                            <div>
-                                <button onClick={() => handleUserMove('Tackle')}>Tackle</button>
-                                <button onClick={() => handleUserMove('Flamethrower')}>Flamethrower</button>
-                                <button onClick={() => handleUserMove('Defense Curl')}>Defense Curl</button>
-                                <button onClick={() => handleUserMove('Recover')}>Recover</button>
+                        <section className="battle-actions">
+                            <div className="user-actions">
+                                {!isBattleOver && userTurn && (
+                                    <div>
+                                        <button className="action-button" onClick={() => handleUserMove('Tackle')}>Tackle</button>
+                                        <button className="action-button" onClick={() => handleUserMove('Flamethrower')}>Flamethrower</button>
+                                        <button className="action-button" onClick={() => handleUserMove('Defense Curl')}>Defense Curl</button>
+                                        <button className="action-button" onClick={() => handleUserMove('Recover')}>Recover</button>
+                                    </div>
+                                )}
+                                {isBattleOver && <button className="new-battle" onClick={startBattle}>Start New Battle</button>}
+                                {/* <button className="new-battle" onClick={startBattle}>Start New Battle</button> */}
                             </div>
-                        )}
-                        {isBattleOver && <button onClick={startBattle}>Start New Battle</button>}
+                            <div className="battle-log">
+                                <div className="battle-log-heading">
+                                    <h2>Battle Log</h2>
+                                </div>
+                                <ul>
+                                    {battleLog.map((log, index) => (
+                                        <li key={index}>{log}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </section>
                     </div>
                 ) : (
                     <PokemonSelector onSelect={setSelectedPokemon} />

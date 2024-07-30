@@ -4,8 +4,7 @@ const PokemonSelector = ({ onSelect }) => {
     const [selectedPokemon, setSelectedPokemon] = useState('');
 
     const pokemonNames = [
-        'pikachu', 'charmander', 'bulbasaur', 'squirtle', 
-        'jigglypuff'];
+        'jigglypuff', 'pikachu', 'charmander', 'bulbasaur', 'squirtle'];
 
     const handleSelect = () => {
         if (selectedPokemon) {
