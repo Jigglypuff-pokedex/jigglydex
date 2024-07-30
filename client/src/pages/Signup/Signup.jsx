@@ -19,6 +19,14 @@ const Signup = () => {
                 <img src={hi} alt="Pokémon" className="poke-hi" />
                 </p>
             </div>
+            <div>
+            <label htmlFor="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" />
+          </div>
+          <div>
+            <label htmlFor="lasstName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" />
+          </div>
           <div>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" />
