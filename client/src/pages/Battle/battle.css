@@ -1,0 +1,70 @@
+.battle-arena {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.select-heading {
+    color: white;
+    font-weight: normal;
+}
+.pokemon-selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(70, 32, 165);
+    padding: 50px;
+    padding-bottom: 60px;
+    margin: 50px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-select-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.battle-dropdown {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.select-pokemon-button {
+    padding: 10px;
+    background-color: rgb(121, 210, 255);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.select-pokemon-button:hover {
+    background-color: rgb(156, 171, 255);
+    transform: translateY(2px);
+}
+
+.select-pokemon-button:active {
+    background-color: rgb(208, 138, 255);
+    
+}
+
+.arena {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
