@@ -44,23 +44,12 @@ dashboardController.getPokemon = async (req, res, next) => {
                 });
             
                 await Promise.all(generationPromises);
-                
-                // fetch all pokemon in species, has multiple varieties
-                // speciesUrls.forEach(async (url) => {
-                //     const response = await fetch(url);
-                //     const data = await response.json();
-                //     // iterate over each variety and get the pokemon url
-                //     for (let i = 0; i < data.varieties.length; i++) {
-                //         generationUrls.push(data.varieties[i].pokemon.url);
-                //     }
-                // });
             }
 
             //get intersection of fetchedUrls
             if(typeUrls) {
                 fetchedUrls = typeUrls;
             }
-            //if fetchedUrls is empty, no need to filter
             if(generationUrls) {
                 fetchedUrls = fetchedUrls.size ? [...fetchedUrls].filter(url => generationUrls.has(url)) : generationUrls;
             }
@@ -105,4 +94,32 @@ dashboardController.getPokemon = async (req, res, next) => {
     }
 }
 
+dashboardController.getRandomPokemon = async (req, res, next) => {
+    try {
+        const randomId = Math.floor(Math.random() * 1025) + 1;
+        const randomPokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
+        const randomPokemonData = await randomPokemonResponse.json();
+        res.locals.randomPokemon = {
+            name: randomPokemonData.name,
+            id: randomPokemonData.id,
+            types: randomPokemonData.types.map(type => type.type.name),
+            image: randomPokemonData.sprites.front_default,
+            stats: {
+                hp: randomPokemonData.stats[0].base_stat,
+                attack: randomPokemonData.stats[1].base_stat,
+                defense: randomPokemonData.stats[2].base_stat,
+                specialAttack: randomPokemonData.stats[3].base_stat,
+                specialDefense: randomPokemonData.stats[4].base_stat,
+                speed: randomPokemonData.stats[5].base_stat,
+            }
+        };
+        return next();
+    } catch (err) {
+        return next({
+            log: `dashboardController.getRandomPokemon: ERROR: ${err}`,
+            status: 500,
+            message: { err: 'An error occurred while fetching random Pokémon' },
+        });
+    }
+};
 module.exports = dashboardController;

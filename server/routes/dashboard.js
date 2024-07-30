@@ -7,4 +7,8 @@ router.get('/', dashboardController.getPokemon, (req, res) => {
     return res.status(200).send(res.locals.pokemon);
 });
 
+router.get('/random', dashboardController.getRandomPokemon, (req, res) => {
+    return res.status(200).send(res.locals.randomPokemon);
+});
+
 module.exports = router;
