@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const dashboardController = {};
 
 dashboardController.getPokemon = async (req, res, next) => {
