@@ -2,10 +2,14 @@ import React from 'react';
 import './signup.css';
 import hi from '../../assets/hihi.png'
 import logo from '../../assets/logo2.png'
+import Navbar from '../../components/Navbar/Navbar.jsx'
 
 const Signup = () => {
 
+
   return (
+    <>
+     <Navbar noBackground showLogo={false}/>
       <div className='signup'>
      <div id="slide-in-text"><img src={logo} alt='logo' className='logo' /></div>
       <div className='form-container'> 
@@ -28,12 +32,13 @@ const Signup = () => {
             <input type="text" id="email" name="email" />
           </div>
           <button type="submit">Signup</button>
-          <div id='login'><p>Already have an account?</p>
+          <div id='ques-signup'><p>Already have an account?</p>
           <a href='/login'>Login</a>
           </div>
         </form>
       </div>
     </div>
+    </>
   );
 };
 

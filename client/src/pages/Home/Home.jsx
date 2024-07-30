@@ -2,16 +2,19 @@ import React from 'react';
 import './home.css';
 import pokeImage from '../../assets/poke.png';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar.jsx';
+// import Footer from '../../components/Footer/Footer.jsx'
 
 const Home = () => {
     
     const navigate = useNavigate();
-
     const handleGetStarted = () => {
         navigate('/signup');
     };
 
   return (
+    <>
+    <Navbar showLogo />
     <div className='home-container'>
       <div className='intro'>
         <h2 id='welcome'>Welcome <br/>to JigglyDex</h2>
@@ -23,6 +26,7 @@ const Home = () => {
         <button className='get-started-button' onClick={handleGetStarted}>Get Started</button>
       </div>
     </div>
+    </>
   )
 }
 
