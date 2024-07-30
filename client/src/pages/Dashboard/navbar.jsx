@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate, Link } from 'react-router-dom'; 
-import logo from '../../assets/logo2.png';
+import logo from '../../assets/newlogo.png';
 
 // Define the pages for the navigation menu
 const pages = ['Dashboard'];
@@ -133,15 +133,21 @@ function Navbar() {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-              {isLoggedIn && (
+              {/* check if the user is logged in? */}
+              {/* if not hide collection and logout buttons */}
+              {isLoggedIn ? (
                 <>
-                  <MenuItem key="collections" onClick={handleCloseNavMenu}>
+                  <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">Collections</Typography>
                   </MenuItem>
-                  <MenuItem key="logout" onClick={handleLogout}>
+                  <MenuItem onClick={handleLogout}>
                     <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
                 </>
+              ) : (
+                <MenuItem onClick={() => navigate('/login')}>
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
               )}
             </Menu>
           </Box>
@@ -206,13 +212,21 @@ function Navbar() {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
-            {isLoggedIn && (
+            {isLoggedIn ? (
               <Button
                 color="inherit"
                 onClick={handleLogout}
                 sx={{ ml: 2 }}
               >
                 Logout
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                onClick={() => navigate('/login')}
+                sx={{ ml: 2 }}
+              >
+                Login
               </Button>
             )}
           </Box>
