@@ -14,7 +14,7 @@ const PokemonSelector = ({ onSelect }) => {
 
     return (
         <div className="pokemon-selector">
-            <h2 className="select-heading">Select Your Pokemon</h2>
+            {/* <h2 className="select-heading">Select Your Pokemon</h2> */}
             <div className="pokemon-select-box">
                 <select className="battle-dropdown" value={selectedPokemon} onChange={(e) => setSelectedPokemon(e.target.value)}>
                     <option value="">Select a Pokemon</option>

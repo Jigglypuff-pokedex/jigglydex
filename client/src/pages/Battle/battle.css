@@ -1,3 +1,8 @@
+body {
+    background-image: url('../../assets/pokemon_stadium.png'); 
+    background-size: cover;
+}
+
 .battle-arena {
     display: flex;
     flex-direction: column;
@@ -6,21 +11,25 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.arena-heading {
+    margin: 10px;
+}
+
 .select-heading {
-    color: rgb(255, 255, 255);
-    font-weight: normal;
+    color: rgb(0, 0, 0);
+    margin-bottom: 10px;
 }
 .pokemon-selector {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px;
-    padding-bottom: 60px;
-    margin: 50px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    background-color: rgb(92, 64, 165);
+    padding-top: 150px;
+    height: 400px;
+    width: 400px;
+    background-image: url('../../assets/Poke_Ball.png'); 
+    background-size: cover;
+    /* border: 7px solid #000000; */
 }
 
 .pokemon-select-box {
@@ -34,7 +43,6 @@
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
-    border: none;
 }
 
 .select-pokemon-button {
@@ -76,6 +84,7 @@
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: white;
 }
 
 .name-image {
@@ -150,10 +159,6 @@
     text-align: center;
 }
 
-.arena-heading {
-    font-size: 24px;
-}
-
 .battle-actions {
     display: flex;
     flex-direction: row;
@@ -172,6 +177,8 @@
     border-radius: 5px;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    background-color: white;
 }
 
 .battle-log {
@@ -181,7 +188,7 @@
     margin: 10px;
     padding: 0 40px 10px 10px;
     width: 80%;
-    background-color: rgb(217, 217, 217);
+    background-color: rgba(255, 255, 255, 0.883);
     border-radius: 5px;
     height: 300px;
     overflow-y: auto;

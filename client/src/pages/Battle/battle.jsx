@@ -150,7 +150,7 @@ const Battle = () => {
         <>
             <Navbar />
             <div className="battle-arena">
-                <h1 className="arena-heading">Battle Arena</h1>
+                <img className="arena-heading" src="https://www.pokemonbattlearena.net/members/theme/assets/IMG/pba_logo.png" alt="Battle Arena" />
                 {selectedPokemon ? (
                     <div className="arena">
                         <div className="opponents">
