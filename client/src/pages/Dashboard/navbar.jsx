@@ -17,7 +17,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../assets/newlogo.png';
 
 // Define the pages for the navigation menu
-const pages = ['Dashboard', 'Evolutions'];
+const pages = ['Dashboard', 'Evolutions', 'Battle'];
 
 // Define a styled Search component using Material UI's styling system
 const Search = styled('div')(({ theme }) => ({

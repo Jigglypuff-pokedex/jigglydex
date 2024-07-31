@@ -7,6 +7,7 @@ import Signup from '../src/pages/Signup/Signup.jsx';
 import Login from '../src/pages/Login/Login.jsx';
 import Evolutions from '../src/pages/Dashboard/evolutions.jsx'; 
 import PrivateRoute from './components/PrivateRoute';
+import Battle from '../src/pages/Battle/battle.jsx';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/evolutions" element={<Evolutions />} /> {/* Add Evolutions route */}
+        <Route path="/battle" element={<Battle />} />
       </Routes>
     </Router>
   );
