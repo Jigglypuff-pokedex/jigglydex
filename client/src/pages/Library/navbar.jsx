@@ -17,7 +17,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 
 // Define the pages for the navigation menu
-const pages = ['Dashboard'];
+const pages = ['Library', 'Battle', 'Evolutions'];
 
 // Define a styled Search component using Material UI's styling system
 const Search = styled('div')(({ theme }) => ({
@@ -91,14 +91,14 @@ function Navbar() {
       <Container maxWidth={false} sx={{ pb: 0, mt: 1 }}>
         <Toolbar disableGutters>
           {/* Logo display for medium and larger screens */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+          <Box sx={{ display: { XS: 'none', md: 'flex' }, alignItems: 'center' }}>
             <IconButton sx={{ p: 0 }} onClick={() => navigate('/')}>
               <Avatar alt="Remy Sharp" src={logo} sx={{ width: '150px', height: 'auto', marginLeft: '100px', borderRadius: 0 }} />
             </IconButton>
           </Box>
 
           {/* Hamburger menu for small screens */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { XS: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -125,7 +125,7 @@ function Navbar() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { XS: 'block', md: 'none' },
               }}
             >
               {pages.map((page) => (
@@ -146,7 +146,7 @@ function Navbar() {
             </Menu>
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', my: 0 }, justifyContent: 'center' }}>
+          <Box sx={{ flexGrow: 1, display: { XS: 'none', md: 'flex', my: 0 }, justifyContent: 'center' }}>
             {pages.map((page) => (
               <Button
                 key={page}

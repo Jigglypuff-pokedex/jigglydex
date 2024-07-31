@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/evolutions" element={<Evolutions />} /> {/* Add Evolutions route */}
+        <Route path="/evolutions" element={<Evolutions />} /> 
         <Route path="/battle" element={<Battle />} />
         <Route path="/library" element={<Library />} />
         <Route path="/pokemonGacha" element={<PokemonGachaMachine />} />
