@@ -1,159 +1,131 @@
-import React, { useEffect, useState } from 'react';
-import anime from 'animejs/lib/anime.es.js';
-import styled, { keyframes } from 'styled-components';
-import pokeball from '../../assets/pkball.png';
-import pokemonCard from '../../assets/hihi.png'; 
-import crystalball from '../../assets/crystalball.jpg'; 
+import React, { useState, useEffect } from 'react';
+import pokeball from '../../assets/pkball.png'; 
+import FlipCard from './flipCardSave';
+import { Box, Button } from '@mui/material';
 
-const MachineContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 600px;
-  position: relative;
-  perspective: 1000px;
-`;
-
-const BallContainer = styled.div`
-  width: 400px;
-  height: 400px;
-  background: url(${crystalball}) no-repeat center center;
-  background-size: contain;
-  position: relative;
-  transform-style: preserve-3d;
-  display: flex;
-  align-items: flex-end; 
-  justify-content: center;
-`;
-
-const Ball = styled.div`
-  width: 50px;
-  height: 50px;
-  background: url(${pokeball}) no-repeat center center;
-  background-size: contain;
-  position: absolute;
-  border-radius: 50%;
-  bottom: 10px; 
-  &.selected-ball {
-    animation: glow 1s infinite alternate;
-  }
-  @keyframes glow {
-    from {
-      box-shadow: 0 0 10px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 255, 0, 0.6),
-        0 0 30px rgba(255, 255, 0, 0.4);
-    }
-    to {
-      box-shadow: 0 0 20px rgba(255, 255, 0, 1), 0 0 30px rgba(255, 255, 0, 0.8),
-        0 0 40px rgba(255, 255, 0, 0.6);
-    }
-  }
-`;
-
-const Exit = styled.div`
-  width: 60px;
-  height: 60px;
-  border: 2px solid #000;
-  border-radius: 50%;
-  background-color: #fff;
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-const Card = styled.div`
-  width: 200px;
-  height: 300px;
-  background: url(${pokemonCard}) no-repeat center center;
-  background-size: contain;
-  display: ${({ show }) => (show ? 'block' : 'none')};
-  margin-top: 20px;
-`;
-
-const Button = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #ffcc5c;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #ff6b6b;
-  }
-`;
-
-const getRandomPosition = (maxWidth) => ({
-  left: Math.random() * (maxWidth - 60) + 'px',
-  bottom: '10px', // 初始位置在底部
-});
-
-const PokemonGachaMachine = () => {
-  const [balls, setBalls] = useState([]);
-  const [selectedBall, setSelectedBall] = useState(null);
+const PokemonGacha = () => {
+  const [pokemon, setPokemon] = useState(null);
+  const [spinning, setSpinning] = useState(false);
   const [showCard, setShowCard] = useState(false);
+  const pokemonAPI = 'http://localhost:3000/api/dashboard/random';
 
   useEffect(() => {
-    const initialBalls = [];
-    for (let i = 0; i < 20; i++) {
-      initialBalls.push(getRandomPosition(400));
+    const wheel = document.getElementById('wheel');
+    if (wheel) {
+      wheel.style.transition = 'none';
+      wheel.style.transform = 'rotate(360deg)';
+      requestAnimationFrame(() => {
+        wheel.style.transition = 'all 0s';
+        wheel.style.transform = 'rotate(0deg)';
+      });
     }
-    setBalls(initialBalls);
   }, []);
 
-  const startAnimation = () => {
-    anime({
-      targets: '.ball',
-      translateX: () => anime.random(-150, 150),
-      translateY: () => anime.random(-50, 150), 
-      rotate: () => anime.random(-360, 360),
-      duration: 2000,
-      easing: 'easeInOutQuad',
-      direction: 'alternate',
-      loop: true,
-    });
-
-    setTimeout(() => {
-      anime.remove('.ball');
-      const randomIndex = Math.floor(Math.random() * balls.length);
-      setSelectedBall(balls[randomIndex]);
-
-      anime({
-        targets: '.ball',
-        translateY: 0,
-        duration: 1000,
-        easing: 'easeInOutQuad',
-        complete: () => {
-          moveToExit();
-        },
-      });
-    }, 3000);
+  const getRandomPokemon = async () => {
+    const response = await fetch(pokemonAPI);
+    const data = await response.json();
+    return data;
   };
 
-  const moveToExit = () => {
-    anime({
-      targets: '.selected-ball',
-      translateY: 150, // 滚到出口的位置
-      translateX: 0, // 滚到出口的位置
-      duration: 1000,
-      easing: 'easeInOutQuad',
-      complete: () => setShowCard(true),
+  const spinWheel = async () => {
+    setSpinning(true);
+    setShowCard(false);
+    const deg = Math.floor(5000 + Math.random() * 5000);
+    const wheel = document.getElementById('wheel');
+    if (wheel) {
+      wheel.style.transition = 'all 5s ease-out';
+      wheel.style.transform = `rotate(${deg}deg)`;
+    }
+    setTimeout(async () => {
+      const actualDeg = deg % 360;
+      const pokemon = await getRandomPokemon();
+      setPokemon(pokemon);
+      setSpinning(false);
+      setShowCard(true);
+    }, 5000);
+  };
+
+  const handleFavorite = async (pokemonId) => {
+    const userId = '66a9828579bbf523a9b981b3'; 
+    const response = await fetch('http://localhost:3000/api/favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, pokemonId }),
     });
+
+    if (response.ok) {
+      console.log('Added to favorites');
+    } else {
+      console.error('Failed to add to favorites');
+    }
+    setShowCard(false);
+  };
+
+  const handleClose = () => {
+    setShowCard(false);
   };
 
   return (
-    <MachineContainer>
-      <BallContainer>
-        {balls.map((pos, index) => (
-          <Ball key={index} className={`ball ${selectedBall === pos ? 'selected-ball' : ''}`} style={pos} />
-        ))}
-        <Exit />
-      </BallContainer>
-      <Button onClick={startAnimation}>PokéDraw!</Button>
-      <Card show={showCard} />
-    </MachineContainer>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', flexDirection: 'column', position: 'relative' }}>
+      <Box id="wheel" sx={{
+        width: 300,
+        height: 300,
+        border: '5px solid #000',
+        borderRadius: '50%',
+        position: 'relative',
+        backgroundImage: `url(${pokeball})`,
+        backgroundSize: 'cover',
+        transition: 'transform 5s ease-out',
+        transform: showCard ? 'scale(0)' : 'scale(1)'
+      }}>
+        <Box sx={{
+          width: 0,
+          height: 0,
+          borderLeft: '15px solid transparent',
+          borderRight: '15px solid transparent',
+          borderBottom: '30px solid red',
+          position: 'absolute',
+          top: '-35px',
+          left: 'calc(50% - 15px)'
+        }}></Box>
+      </Box>
+      <Button onClick={spinWheel} disabled={spinning} variant="contained" color="primary" sx={{ mt: 2 }}>Spin!</Button>
+      {pokemon && showCard && (
+        <Box sx={{
+          width: '300px',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          animation: 'grow 1s ease-out forwards, yellowGlow 1s infinite alternate',
+          '@keyframes grow': {
+            from: { transform: 'scale(0) translate(-50%, -50%)' },
+            to: { transform: 'scale(1) translate(-50%, -50%)' }
+          },
+          '@keyframes yellowGlow': {
+            from: { boxShadow: '0 0 5px #fff' },
+            to: { boxShadow: '0 0 20px #ffeb3b' }
+          },
+          margin: 0,
+        }}>
+          <FlipCard
+            id={pokemon.id}
+            name={pokemon.name}
+            types={pokemon.types}
+            image={pokemon.image}
+            stats={pokemon.stats}
+            onClose={handleClose}
+            onFavorite={handleFavorite}
+          />
+        </Box>
+      )}
+    </Box>
   );
 };
 
-export default PokemonGachaMachine;
+export default PokemonGacha;

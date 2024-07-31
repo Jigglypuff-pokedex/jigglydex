@@ -7,6 +7,7 @@ import FlashOnIcon from '@mui/icons-material/FlashOn';
 import SecurityIcon from '@mui/icons-material/Security'; 
 import SpeedIcon from '@mui/icons-material/Speed';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'; 
+import CloseIcon from '@mui/icons-material/Close';
 
 const CardContainer = styled(Box)(({ theme }) => ({
   perspective: '1000px',
@@ -15,7 +16,9 @@ const CardContainer = styled(Box)(({ theme }) => ({
   margin: theme.spacing(2),
 }));
 
-const CardInner = styled(Box)(({ isFlipped }) => ({
+const CardInner = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isFlipped',
+})(({ isFlipped }) => ({
   position: 'relative',
   width: '100%',
   height: '100%',
@@ -52,25 +55,48 @@ const StatDetails = styled(Box)(({ theme }) => ({
   flexGrow: 1,
 }));
 
+const typeColors = {
+  normal: '#A8A77A',
+  fire: '#EE8130',
+  water: '#6390F0',
+  electric: '#F7D02C',
+  grass: '#7AC74C',
+  ice: '#96D9D6',
+  fighting: '#C22E28',
+  poison: '#A33EA1',
+  ground: '#E2BF65',
+  flying: '#A98FF3',
+  psychic: '#F95587',
+  bug: '#A6B91A',
+  rock: '#B6A136',
+  ghost: '#735797',
+  dragon: '#6F35FC',
+  dark: '#705746',
+  steel: '#B7B7CE',
+  fairy: '#D685AD',
+};
 
-
-const FlipCard = ({ id, name, type, image, stats }) => {
+const FlipCard = ({ id, name, types, image, stats, onClose, onFavorite }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
+
   const handleAddToCollection = (event) => {
     event.stopPropagation();
     setIsAdded(!isAdded);
-    //addToCollection(id);
+    onFavorite(id);
   };
 
   return (
     <CardContainer onClick={handleClick}>
       <CardInner isFlipped={isFlipped}>
         <CardFace>
+          <IconButton sx={{ position: 'absolute', top: 8, right: 8 }} onClick={(e) => { e.stopPropagation(); onClose(); }}>
+            <CloseIcon />
+          </IconButton>
           <CardMedia
             component="img"
             image={image}
@@ -78,15 +104,31 @@ const FlipCard = ({ id, name, type, image, stats }) => {
             height="300"
           />
           <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ ml: 2, mr: 2 }}>
-              <Box>
-                <Typography variant="h5">{name}</Typography>
-                <Typography variant="body2" color="textSecondary">Type: {type}</Typography>
-                <Typography variant="body2" color="textSecondary">ID: {id}</Typography>
+            <Box>
+              <Typography variant="h5">{name}</Typography>
+              <Typography variant="body2" color="textSecondary">ID: {id}</Typography>
+              <Box display="flex" justifyContent="left" mt={1} ml={0}>
+                {types.map((type) => (
+                  <Box
+                    key={type}
+                    sx={{
+                      backgroundColor: typeColors[type] || 'gray',
+                      borderRadius: '4px',
+                      color: 'white',
+                      padding: '2px 8px',
+                      margin: '0 4px',
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {type}
+                  </Box>
+                ))}
               </Box>
-              <IconButton onClick={handleAddToCollection}>
-                {isAdded ? <FavoriteIcon sx={{ color: '#f4c2c2' }} /> : <FavoriteBorderIcon />}
-              </IconButton>
             </Box>
+            <IconButton onClick={handleAddToCollection}>
+              {isAdded ? <FavoriteIcon sx={{ color: '#f4c2c2' }} /> : <FavoriteBorderIcon />}
+            </IconButton>
+          </Box>
         </CardFace>
         <CardBack>
           <CardContent>

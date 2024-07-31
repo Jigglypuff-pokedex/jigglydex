@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box, Grid, Pagination, styled } from '@mui/material';
 import FlipCard from './flipCard';
@@ -23,29 +23,31 @@ const ContentBox = styled(Box)(({ theme }) => ({
 
 const itemsPerPage = 12; 
 
-const Content = () => {
+const Content = ({ filters }) => {
   const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { type, generation } = filters;
+        const response = await fetch(`http://localhost:3000/api/dashboard?type=${type}&generation=${generation}`);
+        const result = await response.json();
+        setData(result);
+        setPage(1); // Reset page to 1 whenever filters change
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    };
+    fetchData();
+  }, [filters]);
 
   const handleChange = (event, value) => {
     setPage(value);
   };
 
-  const data = Array.from(Array(50).keys()).map((id) => ({
-    id,
-    name: `Pokemon ${id + 1}`,
-    type: 'Fire',
-    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + 1}.png`,
-    stats: {
-      hp: 45 + id,
-      attack: 49 + id,
-      defense: 49 + id,
-      specialAttack: 65 + id,
-      specialDefense: 65 + id,
-      speed: 45 + id,
-    },
-  }));
-
   const paginatedData = data.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
   return (
     <ThemeProvider theme={theme}>
       <ContentBox>
@@ -55,7 +57,7 @@ const Content = () => {
               <FlipCard
                 id={pokemon.id}
                 name={pokemon.name}
-                type={pokemon.type}
+                types={pokemon.types}
                 image={pokemon.image}
                 stats={pokemon.stats}
               />

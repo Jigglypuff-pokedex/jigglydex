@@ -17,7 +17,6 @@ import { css, Global } from '@emotion/react';
 import logo from '../../assets/logo2.png';
 import { useNavigate } from 'react-router-dom';
 
-
 // Global styles for font import
 const globalStyles = css`
   @import url('https://fonts.googleapis.com/css2?family=Inter&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
@@ -27,7 +26,7 @@ const globalStyles = css`
 `;
 
 // Define the pages for the navigation menu
-const pages = ['Library', 'Collections', 'PokéGacha'];
+const pages = ['Library', 'Collections'];
 
 // Define keyframes for gradient animation
 const gradientAnimation = `
@@ -109,10 +108,15 @@ function Navbar() {
     setAnchorElNav(null);
   };
 
+  // Handle navigation for both large and small screens
+  const handleNavigate = (page) => {
+    navigate(`/${page.toLowerCase()}`);
+  };
+
   // Handle logout logic
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove the token from local storage
-    navigate('/login'); // Redirect to the login page
+    navigate('/'); // Redirect to the login page
   };
 
   return (
@@ -161,7 +165,7 @@ function Navbar() {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <MenuItem key={page} onClick={() => handleNavigate(page)}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
@@ -174,7 +178,7 @@ function Navbar() {
               {pages.map((page) => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  onClick={() => handleNavigate(page)}
                   sx={{
                     height: '100%',
                     mr: 3,
@@ -210,7 +214,7 @@ function Navbar() {
                 />
               </Search>
             </Box>
-            <Button color="inherit" sx={{ fontSize: '17px', fontFamily: 'Josefin Sans, sans-serif' }}>LogOut</Button>
+            <Button color="inherit" onClick={handleLogout} sx={{ fontSize: '17px', fontFamily: 'Josefin Sans, sans-serif' }}>LogOut</Button>
           </Toolbar>
         </Container>
       </AnimatedAppBar>
