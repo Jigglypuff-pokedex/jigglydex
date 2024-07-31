@@ -40,7 +40,7 @@ dashboardController.getPokemon = async (req, res, next) => {
                         generationUrls.push(variety.pokemon.url);
                     });
                 });
-            
+                
                 await Promise.all(generationPromises);
             }
 

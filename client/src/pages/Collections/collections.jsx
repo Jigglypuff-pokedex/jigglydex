@@ -3,6 +3,7 @@ import { Grid, LinearProgress, Button } from '@mui/material';
 import Navbar from '../Library/navbar';
 import FlipCard from '../Library/flipCard';
 import { Box } from '@mui/system';
+import forest from '../../assets/forest.jpg'
 
 const Collections = () => {
     const [favorites, setFavorites] = useState([]);
@@ -60,7 +61,7 @@ const Collections = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh', background: `url(${forest})`, backgroundSize: 'cover' }}>
           <Navbar />
           <Box>
             {loading ? (

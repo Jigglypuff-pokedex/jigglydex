@@ -12,14 +12,18 @@ const CardContainer = styled(Box)(({ theme }) => ({
   width: '300px',
   height: '400px',
   margin: theme.spacing(2),
+  transition: 'background 0.5s',
+  '&:hover': {
+    background: 'linear-gradient(45deg, #ff6b6b, #ffcc5c, #88d8b0, #6b6bff)',
+  },
 }));
 
 const CardInner = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'isFlipped',
 })(({ isFlipped }) => ({
   position: 'relative',
-  width: '100%',
-  height: '100%',
+  width: '95%',
+  height: '95%',
   transition: 'transform 0.6s',
   transformStyle: 'preserve-3d',
   transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0)',
@@ -31,8 +35,9 @@ const CardFace = styled(Card)(({ theme }) => ({
   height: '100%',
   backfaceVisibility: 'hidden',
   border: '1px solid #ccc', 
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', 
   borderRadius: '10px',  
+  marginLeft: theme.spacing(1), 
+  marginTop: theme.spacing(1)
 }));
 
 const CardBack = styled(CardFace)(({ theme }) => ({
@@ -81,7 +86,12 @@ const FlipCard = ({ id, name, types, image, stats }) => {
   };
 
   return (
-    <CardContainer onClick={handleClick}>
+    <CardContainer
+      onClick={handleClick}
+      sx={{
+        background: isFlipped ? 'linear-gradient(45deg, #ff6b6b, #ffcc5c, #88d8b0, #6b6bff)' : 'none',
+      }}
+    >
       <CardInner isFlipped={isFlipped}>
         <CardFace>
           <CardMedia
@@ -90,27 +100,27 @@ const FlipCard = ({ id, name, types, image, stats }) => {
             alt={name}
             height="300"
           />
-          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ ml: 2, mr: 2 }}>
-              <Box>
-                <Typography variant="h5">{name}</Typography>
-                <Typography variant="body2" color="textSecondary">ID: {id}</Typography>
-                <Box display="flex" justifyContent="left" mt={1} ml={0}>
-          {types.map((type) => (
-            <Box
-              key={type}
-              sx={{
-                backgroundColor: typeColors[type] || 'gray',
-                borderRadius: '4px',
-                color: 'white',
-                padding: '2px 8px',
-                margin: '0 4px',
-                textTransform: 'capitalize',
-              }}
-            >
-              {type}
-            </Box>
-          ))}
-        </Box>
+          <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mt: -3, ml: 2, mr: 2 }}>
+            <Box>
+              <Typography variant="h5">{name}</Typography>
+              <Typography variant="body2" color="textSecondary">ID: {id}</Typography>
+              <Box display="flex" justifyContent="left" mt={1} ml={0}>
+                {types.map((type) => (
+                  <Box
+                    key={type}
+                    sx={{
+                      backgroundColor: typeColors[type] || 'gray',
+                      borderRadius: '4px',
+                      color: 'white',
+                      padding: '2px 8px',
+                      margin: '0 4px',
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {type}
+                  </Box>
+                ))}
+              </Box>
             </Box> 
           </Box>
         </CardFace>

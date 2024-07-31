@@ -26,7 +26,7 @@ const globalStyles = css`
 `;
 
 // Define the pages for the navigation menu
-const pages = ['Library', 'Collections'];
+const pages = ['Library', 'Collections', 'Battle', 'Evolutions'];
 
 // Define keyframes for gradient animation
 const gradientAnimation = `
