@@ -85,7 +85,7 @@ const Login = () => {
               <p className="error-message">Login failed. Please try again.</p>
             )}
             <div id='ques-signup'>
-            <p>Don't have an account</p>
+            <p>Don't have an account?</p>
               <a href='/signup'>Signup</a>
             </div>
           </form>

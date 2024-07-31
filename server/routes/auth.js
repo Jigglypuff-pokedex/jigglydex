@@ -18,12 +18,23 @@ router.post('/signup', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
     await user.save();
-    res.json({ message: 'User registered successfully' });
+    res.locals.newUser = user;
+    res.status(200).json({ message: 'User registered successfully' , userId: user._id });
+    console.log('newUser --> ', user);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
   }
 });
+
+//http://localhost:3000/api/favorites?userId=66a97eaeda6817b595b02f64&pokemonId11
+// {
+//   "firstName": "p5",
+//   "lastName" : "y",
+//   "email": "p5@mail.com",
+//   "username": "p5",
+//   "password": "111"
+// }
 
 // Login Route
 router.post('/login', async (req, res) => {
