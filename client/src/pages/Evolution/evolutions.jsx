@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Grid, Card, CardContent, CardMedia, styled } from '@mui/material';
-import Navbar from './navbar';
+import Navbar from '../Library/navbar';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const StyledBox = styled(Box)({

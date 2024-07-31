@@ -30,7 +30,7 @@ const Navbar = ({ noBackground,showLogo }) => {
           {isSignupPage && <img src={pokeball} alt="Pokéball" className="pokeball-icon" />}
           Login
         </Link>
-        <Link to="/dashboard" className="nav-link">
+        <Link to="/library" className="nav-link">
           {isSignupPage && <img src={pokeball} alt="Pokéball" className="pokeball-icon" />}
           Jiggly Dash
         </Link>

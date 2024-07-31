@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../Dashboard/navbar.jsx';
+import Navbar from '../Library/navbar.jsx';
 import PokemonSelector from './pokemonSelector.jsx';
 import './battle.css';
 

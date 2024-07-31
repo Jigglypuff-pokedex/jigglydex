@@ -35,7 +35,7 @@ const Login = () => {
         localStorage.setItem('token', data.token);
         setSuccess('Login successful!');
         setError(false);
-        navigate('/dashboard');
+        navigate('/library');
       })
       .catch((error) => {
         console.error('Error', error);

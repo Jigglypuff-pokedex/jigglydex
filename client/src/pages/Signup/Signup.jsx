@@ -33,7 +33,7 @@ const Signup = () => {
         console.log('Success -->', data);
         setSuccess('Signup successful!');
         setError(false);
-        navigate('/dashboard');  // Redirect to dashboard on successful signup
+        navigate('/library');  // Redirect to dashboard on successful signup
       })
       .catch((error) => {
         console.error('Error', error);

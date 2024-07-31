@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Box, styled, IconButton, LinearProgress } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import ShieldIcon from '@mui/icons-material/Shield';
-import FlashOnIcon from '@mui/icons-material/FlashOn';
-import SecurityIcon from '@mui/icons-material/Security';
+import FavoriteIcon from '@mui/icons-material/Favorite'; 
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'; 
+import ShieldIcon from '@mui/icons-material/Shield'; 
+import FlashOnIcon from '@mui/icons-material/FlashOn'; 
+import SecurityIcon from '@mui/icons-material/Security'; 
 import SpeedIcon from '@mui/icons-material/Speed';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'; 
+import CloseIcon from '@mui/icons-material/Close';
 
 const CardContainer = styled(Box)(({ theme }) => ({
   perspective: '1000px',
@@ -15,13 +16,15 @@ const CardContainer = styled(Box)(({ theme }) => ({
   margin: theme.spacing(2),
 }));
 
-const CardInner = styled(Box)(({ isflipped }) => ({
+const CardInner = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isFlipped',
+})(({ isFlipped }) => ({
   position: 'relative',
   width: '100%',
   height: '100%',
   transition: 'transform 0.6s',
   transformStyle: 'preserve-3d',
-  transform: isflipped ? 'rotateY(180deg)' : 'rotateY(0)',
+  transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0)',
 }));
 
 const CardFace = styled(Card)(({ theme }) => ({
@@ -29,9 +32,9 @@ const CardFace = styled(Card)(({ theme }) => ({
   width: '100%',
   height: '100%',
   backfaceVisibility: 'hidden',
-  border: '1px solid #ccc',  // Border color
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',  // Shadow effect
-  borderRadius: '10px',  // Rounded corners
+  border: '1px solid #ccc', 
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', 
+  borderRadius: '10px',  
 }));
 
 const CardBack = styled(CardFace)(({ theme }) => ({
@@ -52,7 +55,28 @@ const StatDetails = styled(Box)(({ theme }) => ({
   flexGrow: 1,
 }));
 
-const FlipCard = ({ id, name, type, image, stats }) => {
+const typeColors = {
+  normal: '#A8A77A',
+  fire: '#EE8130',
+  water: '#6390F0',
+  electric: '#F7D02C',
+  grass: '#7AC74C',
+  ice: '#96D9D6',
+  fighting: '#C22E28',
+  poison: '#A33EA1',
+  ground: '#E2BF65',
+  flying: '#A98FF3',
+  psychic: '#F95587',
+  bug: '#A6B91A',
+  rock: '#B6A136',
+  ghost: '#735797',
+  dragon: '#6F35FC',
+  dark: '#705746',
+  steel: '#B7B7CE',
+  fairy: '#D685AD',
+};
+
+const FlipCard = ({ id, name, types, image, stats, onClose, onFavorite }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
@@ -63,13 +87,16 @@ const FlipCard = ({ id, name, type, image, stats }) => {
   const handleAddToCollection = (event) => {
     event.stopPropagation();
     setIsAdded(!isAdded);
-    //addToCollection(id);
+    onFavorite(id);
   };
 
   return (
     <CardContainer onClick={handleClick}>
-      <CardInner isflipped={isFlipped}>
+      <CardInner isFlipped={isFlipped}>
         <CardFace>
+          <IconButton sx={{ position: 'absolute', top: 8, right: 8 }} onClick={(e) => { e.stopPropagation(); onClose(); }}>
+            <CloseIcon />
+          </IconButton>
           <CardMedia
             component="img"
             image={image}
@@ -79,8 +106,24 @@ const FlipCard = ({ id, name, type, image, stats }) => {
           <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ ml: 2, mr: 2 }}>
             <Box>
               <Typography variant="h5">{name}</Typography>
-              <Typography variant="body2" color="textSecondary">Type: {type}</Typography>
               <Typography variant="body2" color="textSecondary">ID: {id}</Typography>
+              <Box display="flex" justifyContent="left" mt={1} ml={0}>
+                {types.map((type) => (
+                  <Box
+                    key={type}
+                    sx={{
+                      backgroundColor: typeColors[type] || 'gray',
+                      borderRadius: '4px',
+                      color: 'white',
+                      padding: '2px 8px',
+                      margin: '0 4px',
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {type}
+                  </Box>
+                ))}
+              </Box>
             </Box>
             <IconButton onClick={handleAddToCollection}>
               {isAdded ? <FavoriteIcon sx={{ color: '#f4c2c2' }} /> : <FavoriteBorderIcon />}
