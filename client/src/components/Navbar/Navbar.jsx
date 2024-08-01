@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './navbar.css';
-import logo from '../../assets/logo2.png'
+import logo from '../../assets/newlogo.png'
 import pokeball from '../../assets/pkball.png';
 
 const Navbar = ({ noBackground,showLogo }) => {
@@ -30,7 +30,7 @@ const Navbar = ({ noBackground,showLogo }) => {
           {isSignupPage && <img src={pokeball} alt="Pokéball" className="pokeball-icon" />}
           Login
         </Link>
-        <Link to="/dashboard" className="nav-link">
+        <Link to="/library" className="nav-link">
           {isSignupPage && <img src={pokeball} alt="Pokéball" className="pokeball-icon" />}
           Jiggly Dash
         </Link>
